@@ -1,0 +1,26 @@
+map calculate_icp_score(string companyName, int employeeCount, string ziaKeywords, string createdDate)
+{
+    result = Collection();
+    score = 40;
+    if(employeeCount >= 250)
+    {
+        score = score + 35;
+    }
+    else if(employeeCount >= 50)
+    {
+        score = score + 20;
+    }
+    if(ziaKeywords.containsIgnoreCase("enterprise") || ziaKeywords.containsIgnoreCase("ERP") || ziaKeywords.containsIgnoreCase("Q4"))
+    {
+        score = score + 20;
+    }
+    tier = "Standard_Nurture";
+    if(score >= 80)
+    {
+        tier = "Enterprise_Tier_1";
+    }
+    formattedDate = createdDate.toTime("yyyy-MM-dd'T'HH:mm:ss").toString("dd-MMM-yyyy HH:mm");
+    result.insert("icp_score": score, "tier": tier, "qualified_at": formattedDate);
+    info result;
+    return result;
+}

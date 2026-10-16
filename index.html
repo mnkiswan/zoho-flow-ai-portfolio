@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoho Flow & AI Automation Architect — Interactive Job Portfolio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.82);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+    }
+    .node-pulse {
+      animation: pulseRing 2s infinite;
+    }
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.45); }
+      70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+  <!-- Top Navigation -->
+  <header class="sticky top-0 z-40 glass-card border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 via-indigo-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-sky-500/20 shrink-0">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <div class="truncate">
+          <div class="flex items-center gap-2">
+            <span id="navCandidateName" class="font-bold text-base sm:text-lg tracking-tight text-white truncate">AI Automation Portfolio</span>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">Zoho Flow + Agentic AI</span>
+          </div>
+          <p id="navCandidateRole" class="text-xs text-slate-400 truncate">Zoho Flow Architect • LLM Orchestration • Deluge & Webhook Engineering</p>
+        </div>
+      </div>
+
+      <!-- View Switcher Tabs -->
+      <nav class="hidden md:flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800" aria-label="Main Navigation">
+        <button type="button" data-tab="workflows" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all bg-sky-500 text-white shadow">
+          1. AI Workflow Case Studies
+        </button>
+        <button type="button" data-tab="connectors" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-300 hover:text-white">
+          2. All Connectors Directory
+        </button>
+        <button type="button" data-tab="deluge" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-300 hover:text-white">
+          3. Deluge & Webhook Lab
+        </button>
+        <button type="button" data-tab="interview" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-300 hover:text-white">
+          4. Zia Prompts & Job Prep
+        </button>
+      </nav>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" id="openProfileModalBtn" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+          </svg>
+          <span>Personalize</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Bar -->
+    <div class="flex md:hidden items-center justify-around border-t border-slate-800/80 bg-slate-900/95 px-2 py-1.5 gap-1 overflow-x-auto">
+      <button type="button" data-tab="workflows" class="nav-tab-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-500 text-white whitespace-nowrap">AI Flows</button>
+      <button type="button" data-tab="connectors" class="nav-tab-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-300 whitespace-nowrap">Connectors</button>
+      <button type="button" data-tab="deluge" class="nav-tab-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-300 whitespace-nowrap">Deluge Lab</button>
+      <button type="button" data-tab="interview" class="nav-tab-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-300 whitespace-nowrap">Job Prep</button>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="relative overflow-hidden border-b border-slate-800/80 bg-gradient-to-b from-slate-900/70 to-[#0b0f19]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-8 space-y-4">
+          <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-300 text-xs font-medium">
+            <span>1,000+ App Connectors</span>
+            <span>•</span>
+            <span>20 Built-in Zia AI Utilities</span>
+            <span>•</span>
+            <span>Real-Time Agentic Actions</span>
+            <span>•</span>
+            <span>Deluge OAuth Scripting</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+            <span id="heroCandidateName">AI Automation & Zoho Flow</span> Engineering Portfolio
+          </h1>
+          <p id="heroCandidateBio" class="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
+            Designing production-grade, context-aware workflows that bridge <a href="https://www.zoho.com/flow/features/ai.html" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline hover:text-sky-300">Zoho Flow's AI Platform</a>, <a href="https://www.zoho.com/flow/features/ai/agentic-actions.html" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline hover:text-sky-300">Zia Agentic Actions</a>, external LLMs (<a href="https://www.zohoflow.com/apps/openai/integrations/zoho-show/" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline hover:text-sky-300">OpenAI</a>, <a href="https://www.zohoflow.com/apps/anthropic-claude/integrations/zoho-projects/" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline hover:text-sky-300">Anthropic Claude</a>, <a href="https://www.zohoflow.com/apps/deepseek/integrations/" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline hover:text-sky-300">DeepSeek</a>), and <a href="https://www.zoho.com/flow/features/custom-functions.html" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline hover:text-sky-300">Deluge Custom Functions</a> across CRM, Finance, Support, and E-Commerce.
+          </p>
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <button type="button" id="heroExploreFlowsBtn" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-sky-500 hover:bg-sky-400 text-white shadow-lg shadow-sky-500/20 transition flex items-center gap-2">
+              <span>Simulate 6 Flagship AI Flows</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            <button type="button" id="heroExploreConnectorsBtn" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+              Browse All Connectors & Zia Actions
+            </button>
+            <span id="heroLocationBadge" class="text-xs text-slate-400 flex items-center gap-1.5 ml-1">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span id="heroLocationText">Ahmedabad, India • Open to Remote & Hybrid AI Roles</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Portfolio Impact Summary Cards -->
+        <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+          <div class="glass-card p-4 rounded-2xl border border-slate-800">
+            <div class="text-xs text-slate-400 font-medium">Flagship AI Architectures</div>
+            <div class="text-2xl font-extrabold text-white mt-1">6 End-to-End</div>
+            <div class="text-xs text-emerald-400 mt-1">Agentic + LLM + Deluge</div>
+          </div>
+          <div class="glass-card p-4 rounded-2xl border border-slate-800">
+            <div class="text-xs text-slate-400 font-medium">Built-in Zia AI Actions</div>
+            <div class="text-2xl font-extrabold text-sky-400 mt-1">20 Utilities</div>
+            <div class="text-xs text-slate-400 mt-1">+ Text-to-Flow & Agentic</div>
+          </div>
+          <div class="glass-card p-4 rounded-2xl border border-slate-800">
+            <div class="text-xs text-slate-400 font-medium">Ecosystem Coverage</div>
+            <div class="text-2xl font-extrabold text-indigo-400 mt-1">1,000+ Apps</div>
+            <div class="text-xs text-slate-400 mt-1">Cloud, On-Prem & Webhooks</div>
+          </div>
+          <div class="glass-card p-4 rounded-2xl border border-slate-800">
+            <div class="text-xs text-slate-400 font-medium">Enterprise Security</div>
+            <div class="text-2xl font-extrabold text-emerald-400 mt-1">OAuth 2.0</div>
+            <div class="text-xs text-slate-400 mt-1">ISO 27001 & SOC-2 Type II</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- TAB 1: FLAGSHIP AI WORKFLOW CASE STUDIES -->
+    <section id="tab-workflows" class="tab-panel space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Flagship AI Automation Case Studies</h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Select a portfolio project below to inspect its architecture, Zia AI utilities, Deluge custom functions, and run a live payload simulation.
+          </p>
+        </div>
+        <!-- Category Filter for Flows -->
+        <div class="flex flex-wrap gap-1.5" id="flowCategoryFilters">
+          <button type="button" data-flow-filter="all" class="flow-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500 text-white">All 6 Flows</button>
+          <button type="button" data-flow-filter="RevOps & CRM" class="flow-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">RevOps & CRM</button>
+          <button type="button" data-flow-filter="Support & CX" class="flow-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Support & CX</button>
+          <button type="button" data-flow-filter="RAG & Voice AI" class="flow-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">RAG & Voice AI</button>
+          <button type="button" data-flow-filter="Finance & Commerce" class="flow-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Finance & Commerce</button>
+        </div>
+      </div>
+
+      <!-- Flow Selector Cards Grid -->
+      <div id="flowCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+      <!-- Interactive Flow Workbench / Visualizer -->
+      <div class="glass-card rounded-2xl border border-slate-800 p-5 sm:p-6 space-y-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span id="activeFlowBadge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30">Case Study #1</span>
+              <span id="activeFlowCategory" class="text-xs text-slate-400 font-medium">RevOps & CRM</span>
+            </div>
+            <h3 id="activeFlowTitle" class="text-lg sm:text-xl font-bold text-white">Autonomous Inbound Lead Qualification & Agentic Routing</h3>
+            <p id="activeFlowSubtitle" class="text-xs sm:text-sm text-slate-300"></p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <button type="button" id="simulateFlowBtn" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span>Run Live Payload Simulation</span>
+            </button>
+            <button type="button" id="copyFlowSummaryBtn" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+              Copy Case Study for Resume
+            </button>
+          </div>
+        </div>
+
+        <!-- Visual Node Pipeline -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Zoho Flow Builder Node Architecture (Click any node to inspect)</span>
+            <span id="simulationStatusText" class="text-xs font-medium text-emerald-400">Ready to test</span>
+          </div>
+          <div id="flowNodesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3"></div>
+        </div>
+
+        <!-- Selected Node Details + Code & Payload Split View -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+          <!-- Left: Node Configuration & Business Logic -->
+          <div class="lg:col-span-6 bg-slate-900/90 rounded-xl border border-slate-800 p-4 space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 id="inspectedNodeTitle" class="text-sm font-bold text-sky-400">Node Inspector</h4>
+              <span id="inspectedNodeType" class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono-code">Trigger</span>
+            </div>
+            <p id="inspectedNodeDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
+            <div class="space-y-2 pt-2 border-t border-slate-800/80">
+              <div class="text-xs font-semibold text-slate-400">Zia Prompt / Field Mapping Configuration:</div>
+              <pre id="inspectedNodeConfig" class="text-xs font-mono-code bg-slate-950 p-3 rounded-lg border border-slate-800 text-emerald-300 whitespace-pre-wrap overflow-x-auto"></pre>
+            </div>
+            <div class="space-y-2 pt-2 border-t border-slate-800/80">
+              <div class="text-xs font-semibold text-slate-400">Why Hiring Managers Love This Architecture:</div>
+              <p id="activeFlowHiringValue" class="text-xs text-slate-300 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Right: Live Payload Trace & Embedded Deluge Function -->
+          <div class="lg:col-span-6 bg-slate-900/90 rounded-xl border border-slate-800 p-4 flex flex-col justify-between space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <button type="button" id="showPayloadViewBtn" class="px-2.5 py-1 rounded text-xs font-semibold bg-sky-500 text-white">Live JSON Payload Trace</button>
+                <button type="button" id="showDelugeViewBtn" class="px-2.5 py-1 rounded text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Deluge Custom Function</button>
+              </div>
+              <button type="button" id="copyCodeSnippetBtn" class="text-xs text-sky-400 hover:text-sky-300 font-medium flex items-center gap-1">
+                <span>Copy Snippet</span>
+              </button>
+            </div>
+            <pre id="activeCodeDisplay" class="text-xs font-mono-code bg-slate-950 p-3.5 rounded-lg border border-slate-800 text-sky-200 overflow-x-auto max-h-72 flex-1 whitespace-pre-wrap"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: ALL CONNECTORS & ZIA AI DIRECTORY -->
+    <section id="tab-connectors" class="tab-panel hidden space-y-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-8 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Zoho Flow Connector & AI Ecosystem Explorer</h2>
+          <p class="text-sm text-slate-400">
+            Zoho Flow connects <a href="https://www.zohoflow.com/apps/" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">1,000+ cloud & on-premises applications</a>. Filter by category or search below to inspect triggers, actions, and AI automation roles for every major connector group.
+          </p>
+
+          <!-- Search & Filter Controls -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1">
+              <input id="connectorSearchInput" type="text" placeholder="Search connectors (e.g., OpenAI, Claude, DeepSeek, Vapi, Zia, CRM, Shopify, Webhook)..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-sky-500" />
+            </div>
+            <select id="connectorCategorySelect" aria-label="Filter Connectors by Category" class="bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+              <option value="all">All Categories (42 Featured Modules)</option>
+              <option value="Native Zia AI">Native Zia AI (Built-in Utilities & Agentic)</option>
+              <option value="External LLMs & AI">External LLMs, Voice AI & Vector DBs</option>
+              <option value="Core Logic & Developer">Core Logic, Webhooks & Deluge Tools</option>
+              <option value="Zoho Ecosystem">Zoho Ecosystem Apps (CRM, Desk, Books...)</option>
+              <option value="Third-Party SaaS">Third-Party SaaS (Slack, Shopify, HubSpot...)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Chart: Ecosystem Distribution -->
+        <div class="lg:col-span-4 glass-card p-4 rounded-2xl border border-slate-800">
+          <div class="text-xs font-semibold text-slate-300 mb-2">Portfolio Connector Stack Breakdown</div>
+          <div class="relative h-44">
+            <canvas id="connectorStackChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connector Cards Grid -->
+      <div id="connectorsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+      <!-- Complete 20 Zia Utilities Reference Table -->
+      <div class="glass-card rounded-2xl border border-slate-800 p-5 sm:p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-white">Complete Reference: All 20 Built-In Zia Utilities (AI Actions) in Zoho Flow</h3>
+            <p class="text-xs text-slate-400">
+              Verified from <a href="https://help.zoho.com/portal/en/kb/flow/user-guide/ai-features/articles/build-smarter-workflows-using-zia-utilities-ai-actions" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">Zoho Flow Zia Utilities Documentation</a> — Drag-and-drop under <span class="font-mono-code text-slate-200">Builder → AI → Zia Utilities</span>.
+            </p>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-300 bg-slate-900/60">
+                <th class="py-2.5 px-3 font-semibold">Zia AI Action Name</th>
+                <th class="py-2.5 px-3 font-semibold">What It Does</th>
+                <th class="py-2.5 px-3 font-semibold">Portfolio Automation Use Case</th>
+              </tr>
+            </thead>
+            <tbody id="ziaUtilitiesTableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: DELUGE & WEBHOOK ENGINEERING LAB -->
+    <section id="tab-deluge" class="tab-panel hidden space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Deluge Custom Functions & Webhook Engineering Lab</h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Hiring managers test whether you can go beyond basic drag-and-drop when an API endpoint, XML payload, or custom LLM call requires <a href="https://help.zoho.com/portal/en/kb/flow/user-guide/create-a-flow/actions-logic/articles/using-custom-functions" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">Deluge Custom Functions</a> and <a href="https://help.zoho.com/portal/en/kb/flow/user-guide/create-a-flow/typesoftriggers/articles/webhook-trigger-typesoftriggers" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">Webhook Triggers</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-4 space-y-2.5" id="delugePatternList"></div>
+        <div class="lg:col-span-8 glass-card rounded-2xl border border-slate-800 p-5 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <h3 id="delugeLabTitle" class="text-base font-bold text-white">Deluge Script</h3>
+              <p id="delugeLabSubtitle" class="text-xs text-slate-400 mt-0.5"></p>
+            </div>
+            <button type="button" id="copyDelugeLabBtn" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-white transition">
+              Copy Deluge Function
+            </button>
+          </div>
+          <pre id="delugeLabCode" class="text-xs font-mono-code bg-slate-950 p-4 rounded-xl border border-slate-800 text-emerald-300 overflow-x-auto whitespace-pre-wrap leading-relaxed"></pre>
+          <div id="delugeLabNotes" class="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 text-xs text-slate-300 leading-relaxed"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: ZIA PROMPTS & INTERVIEW PREP -->
+    <section id="tab-interview" class="tab-panel hidden space-y-8">
+      <div>
+        <h2 class="text-xl sm:text-2xl font-bold text-white">Zia Text-to-Flow Prompt Templates & AI Job Interview Playbook</h2>
+        <p class="text-sm text-slate-400 mt-1">
+          Use these copy-ready <a href="https://help.zoho.com/portal/en/kb/flow/user-guide/ai-features/articles/generating-workflows-using-zia-text-to-flow" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">Zia Text-to-Flow prompts</a> to spin up live demos in your Zoho Flow account in seconds, plus talking points for technical interviews.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="ziaPromptCardsContainer"></div>
+
+      <!-- Architecture Comparison & Interview Q&A -->
+      <div class="glass-card rounded-2xl border border-slate-800 p-5 sm:p-6 space-y-4">
+        <h3 class="text-base sm:text-lg font-bold text-white">Top Technical Interview Questions for a Zoho Flow AI Automation Role</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="interviewQaGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Personalize Portfolio Modal -->
+  <div id="profileModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card rounded-2xl border border-slate-700 max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="text-base font-bold text-white">Personalize Your Portfolio Header</h3>
+        <button type="button" id="closeProfileModalBtn" class="text-slate-400 hover:text-white text-sm font-bold px-2 py-1">✕</button>
+      </div>
+      <div class="space-y-3">
+        <div>
+          <label for="inputCandidateName" class="block text-xs font-medium text-slate-300 mb-1">Your Name / Brand</label>
+          <input id="inputCandidateName" type="text" value="AI Automation & Zoho Flow" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white" />
+        </div>
+        <div>
+          <label for="inputCandidateRole" class="block text-xs font-medium text-slate-300 mb-1">Target Role Headline</label>
+          <input id="inputCandidateRole" type="text" value="Zoho Flow Architect • LLM Orchestration • Deluge & Webhook Engineering" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white" />
+        </div>
+        <div>
+          <label for="inputCandidateLocation" class="block text-xs font-medium text-slate-300 mb-1">Location & Availability</label>
+          <input id="inputCandidateLocation" type="text" value="Ahmedabad, India • Open to Remote & Hybrid AI Roles" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white" />
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" id="cancelProfileBtn" class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">Cancel</button>
+        <button type="button" id="saveProfileBtn" class="px-4 py-2 rounded-lg text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-white">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-semibold text-xs shadow-xl">
+    Copied to clipboard!
+  </div>
+
+  <footer class="border-t border-slate-800/80 py-5 px-4 text-center text-xs text-slate-400">
+    Built for AI Automation & Zoho Flow Job Interviews • Grounded with official <a href="https://www.zoho.com/flow/features/ai.html" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">Zoho Flow AI</a>, <a href="https://www.zoho.com/flow/features/ai/agentic-actions.html" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">Zia Agentic Actions</a> & <a href="https://www.zohoflow.com/apps/" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline">Zoho Flow App Gallery</a> documentation.
+  </footer>
+
+  <script>
+    // --- DATA: 6 Flagship AI Automation Case Studies ---
+    const FLOW_PROJECTS = [
+      {
+        id: 'flow-1',
+        badge: 'Case Study #1',
+        category: 'RevOps & CRM',
+        title: 'Autonomous Inbound Lead Qualification & Agentic Routing',
+        subtitle: 'Combines Zoho CRM Triggers, Zia Keyword & Summary Utilities, Deluge ICP Scoring, and Zia Agentic Actions for instant enterprise routing.',
+        appsUsed: ['Zoho CRM', 'Zia Utilities', 'Deluge Custom Function', 'Zia Agentic Actions', 'Zoho Cliq', 'Zoho Mail'],
+        hiringValue: 'Demonstrates mastery of Zoho Flow’s hybrid rule + agentic pattern: deterministic Deluge code calculates a numeric ICP score and normalizes dates, while Zia Agentic Actions read unstructured prospect inquiry notes to decide whether to book an enterprise demo, notify a senior AE in Zoho Cliq, or enroll in a nurture sequence.',
+        nodes: [
+          {
+            name: '1. Zoho CRM Trigger',
+            type: 'App Trigger',
+            desc: 'Triggers immediately when a new Lead record is created in Zoho CRM from website forms, paid ads, or webinar signups.',
+            config: 'Trigger: Zoho CRM -> Lead Created\nFilter Criteria: Lead_Source != "Internal Test"\nMapped Variables: ${trigger.Full_Name}, ${trigger.Company}, ${trigger.Description}, ${trigger.Annual_Revenue}'
+          },
+          {
+            name: '2. Zia: Extract & Summarize',
+            type: 'Zia Utilities',
+            desc: 'Chains two built-in Zia Utilities: "Extract keywords" to pull buying signals/tech stack and "Summarize text" to condense the inquiry into 3 bullet points.',
+            config: 'Action 1: AI -> Zia Utilities -> Extract keywords\nInput: ${trigger.Description}\n\nAction 2: AI -> Zia Utilities -> Summarize text\nPrompt: "Summarize the prospect inquiry in 3 bullet points highlighting budget, timeline, and product interest."'
+          },
+          {
+            name: '3. Deluge ICP Scoring',
+            type: 'Custom Function',
+            desc: 'Executes a reusable Deluge Custom Function returning a map datatype with ICP tier, normalized timestamp, and domain verification.',
+            config: 'Function Name: calculate_icp_score(string company, float revenue, string keywords)\nReturn Type: map ({"tier": "Enterprise", "score": 92, "sla_minutes": 15})'
+          },
+          {
+            name: '4. Zia Agentic Decision',
+            type: 'Agentic AI',
+            desc: 'Uses "Run agentic action" (JSON response mode) to evaluate the Zia summary + ICP score and dynamically choose from 3 pre-configured actions.',
+            config: 'AI -> Agentic AI -> Run agentic action\nPrompt: "Evaluate ${summarizeText.response} and ICP tier ${calculate_icp_score.tier}. If Enterprise or urgent buying intent, notify Senior AE in Zoho Cliq and assign high priority; otherwise send personalized intro via Zoho Mail."'
+          },
+          {
+            name: '5. Zoho Cliq & CRM Sync',
+            type: 'App Action',
+            desc: 'Updates the Zoho CRM lead owner/status and posts an AI-briefed card in the #enterprise-deals Zoho Cliq channel with "Let AI decide" message body.',
+            config: 'Enabled Agentic Pool:\n1. Zoho Cliq -> Message in channel (Message: Let AI decide)\n2. Zoho CRM -> Update Lead (Lead_Status: "AI Qualified")\n3. Zoho Mail -> Send Email (Template: Early Stage Nurture)'
+          }
+        ],
+        payloadTrace: `{
+  "trigger_event": "zoho_crm.lead_created",
+  "lead_id": "5829100000491823",
+  "company": "FinEdge Global Ltd",
+  "inquiry_note": "Looking to automate 45,000 monthly support tickets and sync ERP invoices across 12 regional teams before Q4.",
+  "zia_utilities_output": {
+    "extracted_keywords": ["45,000 monthly tickets", "ERP invoices", "Q4 deadline"],
+    "summary_bullets": [
+      "• High-volume support & ERP invoice automation need (45k tickets/mo)",
+      "• Multi-region deployment across 12 teams",
+      "• Urgent Q4 implementation timeline"
+    ]
+  },
+  "deluge_icp_output": {
+    "icp_score": 94,
+    "tier": "Enterprise_Tier_1",
+    "sla_window_mins": 15
+  },
+  "zia_agentic_action_selected": "Notify_Senior_AE_Cliq_And_Assign_CRM"
+}`,
+        delugeCode: `map calculate_icp_score(string companyName, int employeeCount, string ziaKeywords, string createdDate)
+{
+    result = Collection();
+    score = 40;
+    if(employeeCount >= 250)
+    {
+        score = score + 35;
+    }
+    else if(employeeCount >= 50)
+    {
+        score = score + 20;
+    }
+    if(ziaKeywords.containsIgnoreCase("enterprise") || ziaKeywords.containsIgnoreCase("ERP") || ziaKeywords.containsIgnoreCase("Q4"))
+    {
+        score = score + 20;
+    }
+    tier = "Standard_Nurture";
+    if(score >= 80)
+    {
+        tier = "Enterprise_Tier_1";
+    }
+    // Convert trigger date into Zoho CRM standard string format
+    formattedDate = createdDate.toTime("yyyy-MM-dd'T'HH:mm:ss").toString("dd-MMM-yyyy HH:mm");
+    result.insert("icp_score": score, "tier": tier, "qualified_at": formattedDate);
+    info result;
+    return result;
+}`
+      },
+      {
+        id: 'flow-2',
+        badge: 'Case Study #2',
+        category: 'Support & CX',
+        title: 'Sentiment-Driven Omnichannel Support Triage & Auto-Drafting',
+        subtitle: 'Pairs Zoho Desk Ticket Triggers with Zia Conversation Tone Detection, Anthropic Claude Knowledge Drafting, and Agentic Escalation.',
+        appsUsed: ['Zoho Desk', 'Zia Utilities', 'Anthropic Claude', 'Zia Agentic Actions', 'Zoho Cliq', 'Zoho CRM'],
+        hiringValue: 'Showcases the flagship Zoho Desk + Zia Utilities + Agentic Action pattern documented by Zoho Flow: replacing brittle 12-branch decision trees with a single context-aware Agentic Action that escalates frustrated customers, logs CRM notes, or sends instant replies.',
+        nodes: [
+          {
+            name: '1. Zoho Desk Trigger',
+            type: 'App Trigger',
+            desc: 'Starts when a new ticket arrives in Zoho Desk across email, web form, or chat portals.',
+            config: 'Trigger: Zoho Desk -> Ticket Created\nFields Mapped: ${trigger.id}, ${trigger.subject}, ${trigger.description}, ${trigger.contactId}'
+          },
+          {
+            name: '2. Zia: Tone & Summary',
+            type: 'Zia Utilities',
+            desc: 'Runs "Find conversation tone" to detect Calm, Frustrated, or Urgent sentiment, paired with "Summarize text" (3 concise bullets under 20 words).',
+            config: 'Action 1: Zia Utilities -> Find conversation tone\nAction 2: Zia Utilities -> Summarize text\nPrompt: "Summarize in 3 concise bullet points under 20 words each. Highlight dates, deadlines, or priorities."'
+          },
+          {
+            name: '3. Anthropic Claude Draft',
+            type: 'LLM Connector',
+            desc: 'Calls the native Anthropic Claude connector in Zoho Flow to generate an accurate, empathetic response grounded in product troubleshooting steps.',
+            config: 'App: Anthropic Claude -> Create Message\nSystem Prompt: "Draft a concise, empathetic resolution response matching customer sentiment: ${findConversationTone.response}."'
+          },
+          {
+            name: '4. Zia Agentic Router',
+            type: 'Agentic AI',
+            desc: 'Evaluates ticket description, detected tone, and priority to pick from 4 pre-configured Zoho Desk / Cliq / Mail / CRM actions.',
+            config: 'Run agentic action Prompt:\n"Check ${trigger.description} and sentiment ${findConversationTone.response}. Choose the best follow-up action from the enabled pool."'
+          },
+          {
+            name: '5. Multi-App Execution',
+            type: 'App Action',
+            desc: 'Executes the AI-selected action: flags senior agent on Zoho Cliq, sends acknowledgement via Zoho Mail, adds note in Zoho CRM, or transfers Desk department.',
+            config: 'Agentic Action Pool:\n• Notify senior support agent in Zoho Cliq\n• Send acknowledgement email via Zoho Mail\n• Add note to Contact in Zoho CRM\n• Move ticket to Engineering Dept in Zoho Desk'
+          }
+        ],
+        payloadTrace: `{
+  "trigger_event": "zoho_desk.ticket_created",
+  "ticket_id": "DESK-90412",
+  "subject": "Production webhook 401 error after OAuth token rotation",
+  "zia_tone_analysis": "Urgent / Frustrated",
+  "zia_summary": "• Customer experiencing 401 Unauthorized on production webhooks\\n• Started immediately after OAuth token rotation\\n• Blocking live order sync",
+  "claude_draft_reply": "Hi team, I see the 401 started right after your OAuth rotation. Please re-authorize the connection link in Settings -> Connections...",
+  "agentic_decision": {
+    "chosen_action": "Notify_Senior_Support_Agent_Cliq_And_Move_To_Tier2",
+    "dynamic_cliq_message": "URGENT Ticket #DESK-90412: Production OAuth 401 issue blocking order sync. Draft reply attached."
+  }
+}`,
+        delugeCode: `map format_ticket_escalation_payload(string ticketId, string subject, string ziaSummary, string sentimentTone)
+{
+    payload = Collection();
+    priorityLevel = "Medium";
+    if(sentimentTone.containsIgnoreCase("Frustrated") || sentimentTone.containsIgnoreCase("Urgent") || subject.containsIgnoreCase("Production"))
+    {
+        priorityLevel = "High";
+    }
+    htmlSummary = "<p><b>Ticket ID:</b> " + ticketId + "</p><p><b>Tone:</b> " + sentimentTone + "</p><p>" + ziaSummary.replaceAll("\n", "<br/>") + "</p>";
+    payload.insert("priority": priorityLevel, "formatted_html": htmlSummary);
+    return payload;
+}`
+      },
+      {
+        id: 'flow-3',
+        badge: 'Case Study #3',
+        category: 'RAG & Voice AI',
+        title: 'Enterprise RAG Knowledge Sync & LLM Evaluation Pipeline',
+        subtitle: 'Connects Zoho WorkDrive documents to DeepSeek, Weaviate Vector DB, FlowiseAI, and HumanLoop for governed enterprise AI search.',
+        appsUsed: ['Zoho WorkDrive', 'DeepSeek', 'Weaviate', 'FlowiseAI', 'HumanLoop', 'Slack'],
+        hiringValue: 'Proves you understand modern AI Engineering inside Zoho Flow—using Zoho Flow’s dedicated connectors for DeepSeek, Weaviate vector databases, FlowiseAI RAG orchestration, and HumanLoop prompt evaluation.',
+        nodes: [
+          {
+            name: '1. Zoho WorkDrive Trigger',
+            type: 'App Trigger',
+            desc: 'Triggers when a new SOP, product spec, or policy document is uploaded to a designated Zoho WorkDrive folder.',
+            config: 'Trigger: Zoho WorkDrive -> File Created in Folder\nFilter: File Extension in [pdf, docx, md, txt]'
+          },
+          {
+            name: '2. Zia: Q&A + Keywords',
+            type: 'Zia Utilities',
+            desc: 'Uses Zia "Generate Q and A" and "Extract keywords" to build structured FAQ pairs and semantic tags from the document text.',
+            config: 'Action 1: Zia Utilities -> Generate Q and A\nAction 2: Zia Utilities -> Extract keywords\nOutput: Structured FAQ pairs + taxonomy tags'
+          },
+          {
+            name: '3. DeepSeek + Weaviate Index',
+            type: 'AI & Vector DB',
+            desc: 'Normalizes metadata via DeepSeek and upserts the document chunks + FAQ pairs into a Weaviate vector collection.',
+            config: 'Connector 1: DeepSeek -> Chat Completion (JSON schema normalization)\nConnector 2: Weaviate -> Create Object in "Enterprise_Knowledge_Base"'
+          },
+          {
+            name: '4. FlowiseAI & HumanLoop',
+            type: 'LLM Ops',
+            desc: 'Triggers a FlowiseAI RAG test run and logs the response quality and latency to HumanLoop for continuous prompt evaluation.',
+            config: 'Connector 1: FlowiseAI -> Execute Prediction\nConnector 2: HumanLoop -> Log Feedback / Evaluation Run'
+          },
+          {
+            name: '5. Slack Knowledge Alert',
+            type: 'App Action',
+            desc: 'Posts the indexed document link, generated Q&A preview, and RAG readiness score to the #ai-knowledge-ops Slack channel.',
+            config: 'App: Slack -> Send Channel Message\nChannel: #ai-knowledge-ops\nIncludes WorkDrive permalink + generated FAQ summary'
+          }
+        ],
+        payloadTrace: `{
+  "trigger_event": "zoho_workdrive.file_created",
+  "file_name": "2026_Enterprise_Refund_Policy_v4.pdf",
+  "zia_generated_qa_count": 8,
+  "extracted_tags": ["SLA credits", "enterprise refund", "pro-rata billing"],
+  "weaviate_upsert": {
+    "collection": "Enterprise_Knowledge_Base",
+    "status": "INDEXED",
+    "vector_dimensions": 1536
+  },
+  "humanloop_eval": {
+    "faithfulness_score": 0.97,
+    "flowise_rag_latency_ms": 640
+  }
+}`,
+        delugeCode: `map prepare_weaviate_rag_object(string fileName, string workdriveUrl, string ziaQaText, string ziaKeywords)
+{
+    ragObject = Collection();
+    keywordList = ziaKeywords.toList(",");
+    ragObject.insert("source_file": fileName);
+    ragObject.insert("source_url": workdriveUrl);
+    ragObject.insert("faq_content": ziaQaText.trim());
+    ragObject.insert("tags": keywordList);
+    ragObject.insert("indexed_timestamp": zoho.currenttime.toString("yyyy-MM-dd'T'HH:mm:ss'Z'"));
+    return ragObject;
+}`
+      },
+      {
+        id: 'flow-4',
+        badge: 'Case Study #4',
+        category: 'RAG & Voice AI',
+        title: 'Voice AI (Vapi) & Post-Meeting Action Dispatcher',
+        subtitle: 'Ingests real-time call webhooks from Vapi Voice AI or Zoho Meeting, polishes transcripts, generates checklists with Zia, and syncs Zoho Projects.',
+        appsUsed: ['Webhook Trigger', 'Vapi', 'Zia Utilities', 'Zoho Projects', 'Zoho Cliq', 'Slack'],
+        hiringValue: 'Highlights advanced Webhook Trigger configuration (JSON payload extraction, header verification, webhook acknowledgement) combined with Vapi Voice AI and Zia’s "Punctuate text", "Conversation summary", and "Generate checklist" utilities.',
+        nodes: [
+          {
+            name: '1. Vapi / Webhook Trigger',
+            type: 'Webhook Trigger',
+            desc: 'Receives end-of-call JSON webhook payloads from Vapi Voice AI agents or Zoho Meeting transcript completions.',
+            config: 'Trigger: Webhook Trigger (JSON Payload Format)\nAdvanced Settings: Extract headers enabled + Webhook acknowledgement (200 OK JSON)'
+          },
+          {
+            name: '2. Zia: Punctuate & Summarize',
+            type: 'Zia Utilities',
+            desc: 'Uses Zia "Punctuate text" to clean raw ASR transcripts, then "Conversation summary" to produce a 3-line executive recap.',
+            config: 'Action 1: Zia Utilities -> Punctuate text\nAction 2: Zia Utilities -> Conversation summary\nInput: ${webhook.transcript}'
+          },
+          {
+            name: '3. Zia: Generate Checklist',
+            type: 'Zia Utilities',
+            desc: 'Extracts concrete action items, owners, and deadlines from the polished transcript using Zia "Generate checklist".',
+            config: 'Action: Zia Utilities -> Generate checklist\nInput: ${punctuateText.response}\nOutput: Structured action items with owners'
+          },
+          {
+            name: '4. Deluge Task Splitter',
+            type: 'Custom Function',
+            desc: 'Iterates through extracted checklist items and creates individual tasks in Zoho Projects using OAuth connection `invokeurl`.',
+            config: 'Function: sync_checklist_to_projects(string projectId, string checklistText)\nUses OAuth Connection: "zoho_projects_oauth"'
+          },
+          {
+            name: '5. Slack & Cliq Broadcast',
+            type: 'App Action',
+            desc: 'Posts the 3-line summary and tagged action checklist to Slack and Zoho Cliq within 60 seconds of call completion.',
+            config: 'Action: Slack / Zoho Cliq -> Post Channel Message\nFormat: Call Summary + Assigned Checklist + Recording URL'
+          }
+        ],
+        payloadTrace: `{
+  "webhook_source": "vapi.call_ended",
+  "caller_phone": "+1-415-890-2311",
+  "duration_seconds": 385,
+  "zia_conversation_summary": "Client approved Phase 2 migration for 120 seats. Requested revised MSA by Friday and sandbox credentials for their QA lead.",
+  "zia_generated_checklist": [
+    "1. Send revised Phase 2 MSA to legal by Friday (Owner: Account Exec)",
+    "2. Provision Zoho Sandbox credentials for QA Lead (Owner: Solutions Architect)",
+    "3. Schedule kickoff call for next Tuesday at 10 AM IST"
+  ],
+  "zoho_projects_tasks_created": 3
+}`,
+        delugeCode: `map create_project_tasks_from_zia(string portalId, string projectId, string ziaChecklist)
+{
+    lines = ziaChecklist.toList("\n");
+    createdCount = 0;
+    for each line in lines
+    {
+        cleanTask = line.trim();
+        if(cleanTask.length() > 5)
+        {
+            taskParam = Collection("name": cleanTask, "priority": "High");
+            resp = invokeurl
+            [
+                url :"https://projectsapi.zoho.com/restapi/portal/" + portalId + "/projects/" + projectId + "/tasks/"
+                type :POST
+                parameters: taskParam
+                connection:"zoho_projects_oauth"
+            ];
+            createdCount = createdCount + 1;
+        }
+    }
+    out = Collection("tasks_created": createdCount, "status": "SUCCESS");
+    return out;
+}`
+      },
+      {
+        id: 'flow-5',
+        badge: 'Case Study #5',
+        category: 'Finance & Commerce',
+        title: 'AI E-Commerce Catalog Copywriter & Multilingual Localization',
+        subtitle: 'Automates product launches across Shopify, Zia Product Copy Utilities, ChatGPT/OpenAI SEO enrichment, and Unbabel translation.',
+        appsUsed: ['Shopify', 'Zia Utilities', 'OpenAI / ChatGPT', 'Unbabel', 'Zoho Inventory', 'Zoho Cliq'],
+        hiringValue: 'Targets E-Commerce and D2C automation roles by chaining three Zia copywriting utilities ("Generate title", "Generate product description", "Rephrase text") with OpenAI/ChatGPT and Unbabel localization.',
+        nodes: [
+          {
+            name: '1. Shopify / Inventory Trigger',
+            type: 'App Trigger',
+            desc: 'Triggers when a new draft SKU or product record is added in Zoho Inventory or Shopify with raw supplier specs.',
+            config: 'Trigger: Shopify -> New Product Created (Status: Draft)\nInput: ${trigger.title}, ${trigger.body_html}, ${trigger.vendor}, ${trigger.tags}'
+          },
+          {
+            name: '2. Zia: Title & Description',
+            type: 'Zia Utilities',
+            desc: 'Uses Zia "Generate title", "Generate product description", and "Rephrase text" to transform raw SKU specs into brand-aligned copy.',
+            config: 'Actions:\n1. Zia -> Generate title\n2. Zia -> Generate product description\n3. Zia -> Rephrase text (Tone: Conversion-Focused & Premium)'
+          },
+          {
+            name: '3. OpenAI + Unbabel Localization',
+            type: 'AI & Translation',
+            desc: 'Generates structured SEO meta tags via OpenAI/ChatGPT and localizes the product listing into German, Spanish, and Japanese via Unbabel.',
+            config: 'Connector 1: OpenAI -> Generate SEO JSON Meta\nConnector 2: Unbabel -> Translate Product Copy (DE, ES, JA)'
+          },
+          {
+            name: '4. Deluge HTML Sanitizer',
+            type: 'Custom Function',
+            desc: 'Formats plain-text AI output into clean Shopify-ready semantic HTML tables and bullet lists.',
+            config: 'Function: build_shopify_html(string description, string specs, string seoKeywords)'
+          },
+          {
+            name: '5. Update Shopify & Notify',
+            type: 'App Action',
+            desc: 'Updates the Shopify product draft with rich HTML and localized variants, then notifies the merchandising team in Zoho Cliq.',
+            config: 'Action 1: Shopify -> Update Product\nAction 2: Zoho Cliq -> Post Merchandising Review Card'
+          }
+        ],
+        payloadTrace: `{
+  "trigger_event": "shopify.product_created",
+  "sku": "ZF-AI-HUB-2026",
+  "raw_specs": "Industrial IoT Gateway, dual ethernet, MQTT/Modbus, IP67 enclosure, -40C to 75C",
+  "zia_generated_title": "Industrial IP67 Dual-Ethernet IoT Edge Gateway (MQTT & Modbus)",
+  "zia_product_description": "Engineered for extreme industrial environments (-40°C to 75°C), this IP67-rated IoT Edge Gateway delivers seamless MQTT and Modbus telemetry...",
+  "unbabel_locales_synced": ["de-DE", "es-ES", "ja-JP"],
+  "shopify_status": "READY_FOR_MERCHANDISING_REVIEW"
+}`,
+        delugeCode: `string build_shopify_html(string ziaHeadline, string ziaDescription, string keySpecs)
+{
+    specItems = keySpecs.toList(",");
+    specHtml = "<ul>";
+    for each item in specItems
+    {
+        specHtml = specHtml + "<li>" + item.trim() + "</li>";
+    }
+    specHtml = specHtml + "</ul>";
+    finalHtml = "<div class='ai-product-copy'><h2>" + ziaHeadline + "</h2><p>" + ziaDescription + "</p><h3>Technical Specifications</h3>" + specHtml + "</div>";
+    return finalHtml;
+}`
+      },
+      {
+        id: 'flow-6',
+        badge: 'Case Study #6',
+        category: 'Finance & Commerce',
+        title: 'Intelligent Overdue Invoice Recovery & Agentic Collections',
+        subtitle: 'Combines Zoho Books Overdue Invoice Triggers, Deluge Aging Calculation, Zia Email Generation, and Agentic Escalation.',
+        appsUsed: ['Zoho Books', 'Deluge Custom Function', 'Zia Utilities', 'Zia Agentic Actions', 'Zoho Mail', 'Zoho CRM'],
+        hiringValue: 'Directly implements Zoho Flow’s official Finance & Invoice Follow-Up AI pattern: tailoring email tone dynamically based on days overdue (1–3 days soft reminder, 14 days firm follow-up, 30+ days Finance Manager escalation).',
+        nodes: [
+          {
+            name: '1. Zoho Books Trigger',
+            type: 'App Trigger',
+            desc: 'Triggers automatically when an invoice status becomes Overdue in Zoho Books or on a scheduled daily check.',
+            config: 'Trigger: Zoho Books -> Invoice Overdue\nMapped Data: ${trigger.invoice_number}, ${trigger.total}, ${trigger.due_date}, ${trigger.customer_name}'
+          },
+          {
+            name: '2. Deluge Aging & LTV Tier',
+            type: 'Custom Function',
+            desc: 'Calculates exact days overdue using Deluge date functions and checks client relationship tier to guide AI tone.',
+            config: 'Function: calculate_invoice_aging(string dueDate, float invoiceAmount)\nOutput: days_overdue, tone_directive, escalation_tier'
+          },
+          {
+            name: '3. Zia: Generate Email',
+            type: 'Zia Utilities',
+            desc: 'Uses Zia "Generate email" to craft a personalized subject line and body calibrated to the invoice amount and days overdue.',
+            config: 'Action: AI -> Zia Utilities -> Generate email\nPrompt: "Write a ${calculate_invoice_aging.tone_directive} follow-up email for Invoice ${trigger.invoice_number} (${trigger.total}) which is ${calculate_invoice_aging.days_overdue} days overdue."'
+          },
+          {
+            name: '4. Zia Agentic Strategy',
+            type: 'Agentic AI',
+            desc: 'Decides the follow-up execution path based on aging tier: 1–3 days (soft reminder), 14 days (firm email + CRM note), 30+ days (Finance Manager escalation).',
+            config: 'Run agentic action:\n"Based on ${calculate_invoice_aging.days_overdue} days overdue and amount ${trigger.total}, execute the matching collections workflow."'
+          },
+          {
+            name: '5. Mail & Finance Escalation',
+            type: 'App Action',
+            desc: 'Sends the tailored Zia email via Zoho Mail and creates an escalation task in Zoho CRM / Zoho Projects for 30+ day accounts.',
+            config: 'Agentic Action Pool:\n1. Zoho Mail -> Send Soft Reminder\n2. Zoho Mail + Zoho CRM -> Firm Notice & Account Note\n3. Zoho Projects -> Create 30-Day Finance Manager Escalation Task'
+          }
+        ],
+        payloadTrace: `{
+  "trigger_event": "zoho_books.invoice_overdue",
+  "invoice_number": "INV-2026-0891",
+  "customer": "Apex Logistics Pvt Ltd",
+  "invoice_total_usd": 14800.00,
+  "deluge_aging_analysis": {
+    "days_overdue": 15,
+    "tone_directive": "Firm but collaborative professional follow-up",
+    "collection_stage": "STAGE_2_14_DAY"
+  },
+  "zia_generated_subject": "Action Required: Invoice INV-2026-0891 ($14,800) – 15 Days Past Due",
+  "agentic_action_executed": "Send_Firm_Followup_And_Log_CRM_Account_Note"
+}`,
+        delugeCode: `map calculate_invoice_aging(string dueDateStr, float amount)
+{
+    dueTime = dueDateStr.toTime("yyyy-MM-dd");
+    daysOverdue = dueTime.daysBetween(zoho.currentdate);
+    tone = "Polite and gentle reminder";
+    stage = "STAGE_1_SOFT";
+    if(daysOverdue >= 30)
+    {
+        tone = "Urgent executive escalation notice requiring immediate payment schedule";
+        stage = "STAGE_3_ESCALATE_FINANCE_MGR";
+    }
+    else if(daysOverdue >= 14)
+    {
+        tone = "Firm, professional two-week overdue follow-up";
+        stage = "STAGE_2_FIRM";
+    }
+    res = Collection();
+    res.insert("days_overdue": daysOverdue, "tone_directive": tone, "collection_stage": stage);
+    return res;
+}`
+      }
+    ];
+
+    // --- DATA: Comprehensive Zoho Flow Connector & AI Modules ---
+    const CONNECTORS_DATA = [
+      // Native Zia AI
+      { name: 'Zia Text-to-Flow (Prompt Builder)', category: 'Native Zia AI', badge: 'Built-In AI', desc: 'Generate complete multi-step Zoho Flow templates from plain English descriptions (Settings -> AI Setup).', url: 'https://help.zoho.com/portal/en/kb/flow/user-guide/ai-features/articles/generating-workflows-using-zia-text-to-flow', triggers: 'Natural Language Prompt', actions: 'Auto-selects Apps, Triggers & Actions' },
+      { name: 'Zia Agentic Actions', category: 'Native Zia AI', badge: 'Agentic AI', desc: 'Context-aware AI steps that evaluate live workflow data and dynamically choose which configured action to execute.', url: 'https://www.zoho.com/flow/features/ai/agentic-actions.html', triggers: 'Any Flow Context', actions: 'Run agentic action (JSON / Plain Text + Let AI Decide fields)' },
+      { name: 'Zia Utilities (20 AI Actions)', category: 'Native Zia AI', badge: 'Built-In AI', desc: '20 zero-code AI utilities including Summarize text, Find conversation tone, Extract keywords, Generate checklist, and Generate email.', url: 'https://help.zoho.com/portal/en/kb/flow/user-guide/ai-features/articles/build-smarter-workflows-using-zia-utilities-ai-actions', triggers: 'Any Preceding Node', actions: '20 Text, Sentiment, Email & Content Actions' },
+
+      // External LLMs & AI Orchestration
+      { name: 'OpenAI', category: 'External LLMs & AI', badge: 'LLM Connector', desc: 'Integrate GPT models, embeddings, and structured completions directly into Zoho Flow pipelines.', url: 'https://www.zohoflow.com/apps/openai/integrations/zoho-show/', triggers: 'Webhook / App Event', actions: 'Create Completion, Generate Image, Create Transcription' },
+      { name: 'ChatGPT', category: 'External LLMs & AI', badge: 'LLM Connector', desc: 'Connect ChatGPT conversational prompts for customer replies, SEO enrichment, and data classification.', url: 'https://www.zohoflow.com/apps/chatgpt/integrations/order-desk/', triggers: 'App / Schedule Event', actions: 'Send Prompt, Generate Contextual Reply' },
+      { name: 'Anthropic Claude', category: 'External LLMs & AI', badge: 'LLM Connector', desc: 'High-context reasoning, document analysis, coding assistance, and nuanced customer support drafting.', url: 'https://www.zohoflow.com/apps/anthropic-claude/integrations/zoho-projects/', triggers: 'Document / Ticket Event', actions: 'Create Message, Analyze Long Document' },
+      { name: 'DeepSeek', category: 'External LLMs & AI', badge: 'LLM Connector', desc: 'Cost-efficient reasoning and structured JSON extraction paired with vector databases like Weaviate.', url: 'https://www.zohoflow.com/apps/deepseek/integrations/', triggers: 'Data Pipeline Event', actions: 'Chat Completion, Code & Logic Extraction' },
+      { name: 'Vapi (Voice AI Agents)', category: 'External LLMs & AI', badge: 'Voice AI', desc: 'Automate inbound/outbound AI phone calls, trigger post-call transcript workflows, and sync CRM call outcomes.', url: 'https://www.zoho.com/flow/features/ai.html', triggers: 'Call Ended, Transcript Ready', actions: 'Start Outbound AI Call, Fetch Call Summary' },
+      { name: 'FlowiseAI', category: 'External LLMs & AI', badge: 'RAG & Agents', desc: 'Trigger visual LangChain/RAG agent graphs and multi-agent chains directly from Zoho Flow.', url: 'https://www.zoho.com/flow/features/ai.html', triggers: 'Knowledge Query / Webhook', actions: 'Execute Prediction, Run RAG Chain' },
+      { name: 'HumanLoop', category: 'External LLMs & AI', badge: 'LLM Evaluation', desc: 'Evaluate, version, and monitor LLM prompt performance and human feedback loops across automated flows.', url: 'https://www.zohoflow.com/apps/humanloop/integrations/', triggers: 'Evaluation Logged', actions: 'Log Generation, Record Feedback, Trigger Prompt' },
+      { name: 'Weaviate Vector DB', category: 'External LLMs & AI', badge: 'Vector DB', desc: 'Store and query vector embeddings for semantic search and enterprise RAG pipelines.', url: 'https://www.zohoflow.com/apps/deepseek/integrations/weaviate/', triggers: 'Document Updated', actions: 'Create Vector Object, Semantic Query' },
+      { name: 'Mem & Cloze AI', category: 'External LLMs & AI', badge: 'AI Knowledge', desc: 'Sync self-organizing workspace notes (Mem) and AI relationship intelligence (Cloze) with Zoho apps.', url: 'https://www.zoho.com/flow/features/ai.html', triggers: 'New Note / Contact Activity', actions: 'Create Mem, Update Relationship Timeline' },
+      { name: 'Unbabel & Dynatrace', category: 'External LLMs & AI', badge: 'AI Translation & Ops', desc: 'AI-powered multilingual translation (Unbabel) and Davis AI observability alerts (Dynatrace).', url: 'https://www.zoho.com/flow/features/ai.html', triggers: 'Translation Completed / Problem Detected', actions: 'Request Translation, Push Deployment Event' },
+
+      // Core Logic & Developer
+      { name: 'Webhook Trigger & Outgoing Webhooks', category: 'Core Logic & Developer', badge: 'Core Tool', desc: 'Start flows from any external HTTP POST (JSON, Form Data, Plain Text/XML) with header extraction and custom acknowledgement.', url: 'https://help.zoho.com/portal/en/kb/flow/user-guide/create-a-flow/typesoftriggers/articles/webhook-trigger-typesoftriggers', triggers: 'Incoming HTTP POST (Single or Multi-entry)', actions: 'Send Outgoing Webhook / Custom Ack Response' },
+      { name: 'Deluge Custom Functions', category: 'Core Logic & Developer', badge: 'Low-Code Engine', desc: 'Write Deluge scripts with void, int, float, string, bool, date, map, list, and FILE datatypes plus OAuth invokeURL calls.', url: 'https://help.zoho.com/portal/en/kb/flow/user-guide/create-a-flow/actions-logic/articles/using-custom-functions', triggers: 'Invoked as Logic Step', actions: 'invokeURL (OAuth), Collection/Map transforms, Date math' },
+      { name: 'Decision, Delay & Variables', category: 'Core Logic & Developer', badge: 'Flow Logic', desc: 'Branch workflows on multi-condition rules, pause execution for time windows, and store state variables.', url: 'https://www.zoho.com/flow/features/ai.html', triggers: 'Inline Flow Control', actions: 'Conditional Branching, Wait/Delay, Set Variable' },
+      { name: 'Schedule, Email & RSS Triggers', category: 'Core Logic & Developer', badge: 'Built-In Triggers', desc: 'Run batch automations on cron schedules, parse incoming emails to a dedicated Zoho Flow address, or watch RSS feeds.', url: 'https://help.zoho.com/portal/en/kb/flow/user-guide/create-a-flow/typesoftriggers/articles/webhook-trigger-typesoftriggers', triggers: 'Cron Schedule, Inbound Email, New RSS Item', actions: 'Trigger Downstream Pipeline' },
+      { name: 'On-Premises Agent Integrations', category: 'Core Logic & Developer', badge: 'Hybrid Cloud', desc: 'Securely bridge local databases, ERP systems, and internal APIs behind corporate firewalls with cloud apps.', url: 'https://www.zoho.com/flow/features/ai.html', triggers: 'Local DB / Service Event', actions: 'Sync On-Prem Records with Zoho Cloud' },
+
+      // Zoho Ecosystem
+      { name: 'Zoho CRM & Bigin', category: 'Zoho Ecosystem', badge: 'Zoho Core', desc: 'Automate lead capture, deal stage progressions, contact enrichment, and AI-driven sales assignments.', url: 'https://www.zohoflow.com/apps/zoho-crm/integrations/zoho-books/', triggers: 'Lead/Deal Created, Updated, Stage Changed', actions: 'Create/Update Module Record, Add Note, Convert Lead' },
+      { name: 'Zoho Desk', category: 'Zoho Ecosystem', badge: 'Zoho Core', desc: 'Omnichannel customer service automation with ticket triggers, SLA escalations, and AI response drafting.', url: 'https://www.zohoflow.com/apps/zoho-desk/integrations/', triggers: 'Ticket Created, Updated, Task Created, Comment Added', actions: 'Create/Update Ticket, Move Dept, Send Reply' },
+      { name: 'Zoho Books & Inventory', category: 'Zoho Ecosystem', badge: 'Zoho Finance', desc: 'Quote-to-cash automation, overdue invoice collections, GST/tax compliance sync, and multi-warehouse stock alerts.', url: 'https://www.zohoflow.com/en-in/apps/zoho-books/integrations/', triggers: 'Invoice Created, Overdue, Paid, Sales Order Created', actions: 'Create Invoice, Record Payment, Update Stock' },
+      { name: 'Zoho Cliq', category: 'Zoho Ecosystem', badge: 'Zoho Collaboration', desc: 'Real-time team chat alerts, interactive bot messages, and AI-summarized operational notifications.', url: 'https://www.zohoflow.com/apps/zoho-cliq/integrations/', triggers: 'New Channel Message, Bot Command', actions: 'Post Message in Channel, Direct Message User' },
+      { name: 'Zoho Mail', category: 'Zoho Ecosystem', badge: 'Zoho Workplace', desc: 'Actionable AI inbox automation: label emails, summarize long threads, and send contextual replies.', url: 'https://www.zohoflow.com/apps/zoho-mail/integrations/', triggers: 'New Email Received, Tagged Email', actions: 'Send Email, Draft Reply, Apply Label' },
+      { name: 'Zoho Creator & Directory', category: 'Zoho Ecosystem', badge: 'Low-Code & IAM', desc: 'Connect custom Zoho Creator business apps and automate user provisioning in Zoho Directory.', url: 'https://www.zohoflow.com/apps/zoho-creator/integrations/zoho-directory/', triggers: 'Record Added/Edited, User Deactivated', actions: 'Add/Update Creator Record, Manage Directory User' },
+      { name: 'Zoho Projects, WorkDrive & Sign', category: 'Zoho Ecosystem', badge: 'Ops & Docs', desc: 'Automate project task creation from meeting notes, index WorkDrive files for RAG, and trigger Zoho Sign e-signatures.', url: 'https://www.zohoflow.com/apps/anthropic-claude/integrations/zoho-workdrive/', triggers: 'Task Created, File Uploaded, Document Signed', actions: 'Create Task, Upload File, Send for Signature' },
+
+      // Third-Party SaaS
+      { name: 'Slack & Microsoft Teams', category: 'Third-Party SaaS', badge: 'Collaboration', desc: 'Cross-platform chat ops, incident escalations, and post-meeting AI action checklists.', url: 'https://www.zohoflow.com/apps/slack/integrations/zoho-creator/', triggers: 'New Message, Channel Created', actions: 'Send Channel Message, Post Rich Block' },
+      { name: 'Shopify & WooCommerce', category: 'Third-Party SaaS', badge: 'E-Commerce', desc: 'Sync orders, customers, and AI-generated product catalog descriptions with Zoho Books and CRM.', url: 'https://www.zohoflow.com/apps/shopify/integrations/', triggers: 'New Order, Paid Order, Product Created', actions: 'Create/Update Product, Fulfill Order, Update Inventory' },
+      { name: 'HubSpot, Salesforce & NetSuite', category: 'Third-Party SaaS', badge: 'Enterprise CRM/ERP', desc: 'Bi-directional enterprise migration and hybrid synchronization between third-party CRMs/ERPs and Zoho One.', url: 'https://www.zohoflow.com/apps/slack/integrations/netsuite/', triggers: 'Contact/Deal/Order Updated', actions: 'Upsert Record, Sync Custom Fields' }
+    ];
+
+    // --- DATA: All 20 Official Zia Utilities ---
+    const ZIA_UTILITIES_20 = [
+      { action: 'Complete phrase', desc: 'Completes the provided phrase.', useCase: 'Customer service chatbot auto-completes "Track my..." -> "...order status."' },
+      { action: 'Conversation summary', desc: 'Generates a summary of the conversation.', useCase: 'Sales manager reviews summaries of multiple client discovery calls.' },
+      { action: 'Extract keywords', desc: 'Extracts keywords from the provided content.', useCase: 'Marketing or RevOps team extracts buying signals from lead inquiries or reviews.' },
+      { action: 'Find conversation tone', desc: 'Finds the tone of the provided conversation.', useCase: 'Support team flags frustrated or urgent customer tickets for immediate escalation.' },
+      { action: 'Generate Q and A', desc: 'Generates questions and answers based on provided content.', useCase: 'HR or Support team builds an internal FAQ knowledge base from handbooks.' },
+      { action: 'Generate checklist', desc: 'Generates checklists based on the provided content.', useCase: 'Project manager turns Zoho Meeting transcripts into an assigned task checklist.' },
+      { action: 'Generate customized response', desc: 'Generates customized response for the provided prompt.', useCase: 'AI assistant personalizes replies or repurposes blog posts into LinkedIn drafts.' },
+      { action: 'Generate email', desc: 'Generates an email based on the provided content.', useCase: 'Finance automation drafts tailored overdue invoice follow-up emails.' },
+      { action: 'Generate email reply', desc: 'Generates an email reply.', useCase: 'Support workflow auto-replies to standard order confirmation inquiries.' },
+      { action: 'Generate essay', desc: 'Generates a structured long-form essay or summary.', useCase: 'Consulting or marketing team drafts newsletter-ready summaries from reports.' },
+      { action: 'Generate headline', desc: 'Generates a headline for provided content.', useCase: 'Content team generates A/B headline variations for new articles.' },
+      { action: 'Generate product description', desc: 'Generates a description for a product.', useCase: 'E-commerce team creates instant Shopify/Zoho Inventory product copy.' },
+      { action: 'Generate story', desc: 'Generates a narrative story.', useCase: 'Brand marketing team develops campaign narratives from product milestones.' },
+      { action: 'Generate title', desc: 'Generates a title for the provided content.', useCase: 'E-commerce and research teams auto-generate SEO titles for listings or decks.' },
+      { action: 'Generate tweet', desc: 'Generates a tweet / short social post.', useCase: 'Social media pipeline drafts 3 social captions whenever a CMS post goes live.' },
+      { action: 'Label email', desc: 'Labels an email based on its content.', useCase: 'Executive inbox workflow auto-classifies investor, billing, and urgent emails.' },
+      { action: 'Punctuate text', desc: 'Adds punctuation to raw unformatted text.', useCase: 'Voice AI pipeline polishes raw ASR call transcripts before summarizing.' },
+      { action: 'Rephrase text', desc: 'Rephrases text based on a specified tone.', useCase: 'E-commerce and ad teams adapt copy tone for enterprise vs SMB audiences.' },
+      { action: 'Reply to review', desc: 'Generates replies for online customer reviews.', useCase: 'Hospitality or retail brand auto-drafts personalized responses to guest reviews.' },
+      { action: 'Summarize text', desc: 'Generates a concise summary of provided content.', useCase: 'Legal, Support, or HR team condenses lengthy tickets, contracts, or CVs.' }
+    ];
+
+    // --- DATA: Deluge Custom Function Patterns ---
+    const DELUGE_PATTERNS = [
+      {
+        id: 'deluge-1',
+        title: '1. OAuth Connection + External LLM API Call (invokeurl)',
+        subtitle: 'Calls an LLM or external REST endpoint using Zoho Flow OAuth Connections (replacing deprecated authtokens).',
+        notes: 'Key Interview Point: All Zoho apps have migrated from authtoken-based authorization to OAuth-based Connections. In Zoho Flow Custom Functions, click "My Connections" in the left console, copy the Connection link name, and reference it inside `invokeurl` via `connection:"your_oauth_link_name"`.',
+        code: `map enrich_lead_with_llm(string leadCompany, string leadMessage)
+{
+    // Build JSON request payload using Deluge Collection/Map
+    headersMap = Collection("Content-Type": "application/json");
+    promptBody = Collection();
+    promptBody.insert("model": "gpt-4o-mini");
+    promptBody.insert("input": "Extract company size, urgency (High/Med/Low), and primary product from: " + leadCompany + " - " + leadMessage);
+    
+    response = invokeurl
+    [
+        url :"https://api.openai.com/v1/responses"
+        type :POST
+        parameters: promptBody.toString()
+        headers: headersMap
+        connection:"openai_production_oauth"
+    ];
+    
+    result = Collection();
+    result.insert("raw_ai_output": response.get("output_text"));
+    result.insert("processed_at": zoho.currenttime.toString("yyyy-MM-dd HH:mm:ss"));
+    info result;
+    return result;
+}`
+      },
+      {
+        id: 'deluge-2',
+        title: '2. Date-Time Format Normalization Between Apps',
+        subtitle: 'Converts incoming webhook/Mailchimp/Shopify timestamps into Zoho CRM or Zoho Creator target formats.',
+        notes: 'Key Interview Point: In Zoho Flow, date-time fields must be converted into string functions before being used in custom functions or downstream data mapping.',
+        code: `string formatDate(string myDate, string fromFormat, string toFormat)
+{
+    // Official Zoho Flow pattern for cross-app date transformation
+    fromDate = myDate.toTime(fromFormat);
+    dateStr = fromDate.toString(toFormat);
+    info "Converted Date: " + dateStr;
+    return dateStr;
+}
+// Example Input Parameters:
+// myDate: "2026-10-16T19:35:00Z"
+// fromFormat: "yyyy-MM-dd'T'HH:mm:ss'Z'"
+// toFormat: "dd-MMM-yyyy HH:mm"`
+      },
+      {
+        id: 'deluge-3',
+        title: '3. Multi-Entry Webhook & XML/JSON Payload Parser',
+        subtitle: 'Parses nested JSON/XML webhook payloads and returns flat key-value maps for downstream Zoho Flow mapping.',
+        notes: 'Key Interview Point: When an external service sends XML to a Zoho Flow Webhook Trigger, select PLAIN TEXT as the payload format in the Webhook Trigger wizard, then parse the XML in a Deluge Custom Function using `.toXMLList()`.',
+        code: `map parse_incoming_webhook(string rawPayload, string sourceHeader)
+{
+    outputMap = Collection();
+    parsedJson = rawPayload.toMap();
+    
+    customerObj = parsedJson.get("customer").toMap();
+    orderTotal = ifnull(parsedJson.get("total_price"), "0.0").toDecimal();
+    
+    vipFlag = false;
+    if(orderTotal >= 2500.00)
+    {
+        vipFlag = true;
+    }
+    
+    outputMap.insert("customer_email": customerObj.get("email"));
+    outputMap.insert("order_total": orderTotal);
+    outputMap.insert("is_vip_order": vipFlag);
+    outputMap.insert("webhook_source": sourceHeader);
+    return outputMap;
+}`
+      },
+      {
+        id: 'deluge-4',
+        title: '4. File Object (FILE Datatype) Attachment Handler',
+        subtitle: 'Fetches a cloud file (CV, Invoice PDF, Contract) as a Deluge FILE object and routes it across apps.',
+        notes: 'Key Interview Point: Zoho Flow supports 9 Deluge datatypes: void, int, float, string, bool, date, map, list, and file. The FILE datatype treats any document fetched from the web or cloud storage as a binary file object ready for upload.',
+        code: `file fetch_and_rename_contract(string fileDownloadUrl, string clientName)
+{
+    fetchedFile = invokeurl
+    [
+        url :fileDownloadUrl
+        type :GET
+    ];
+    cleanName = clientName.replaceAll(" ", "_") + "_Signed_MSA.pdf";
+    fetchedFile.setFileName(cleanName);
+    return fetchedFile;
+}`
+      }
+    ];
+
+    // --- DATA: Zia Prompts & Interview Q&A ---
+    const ZIA_PROMPTS = [
+      {
+        title: 'Prompt 1: CRM-to-Books Invoice + AI Follow-Up',
+        prompt: 'When a deal is marked as Closed Won in Zoho CRM, create an invoice in Zoho Books, summarize the deal notes using Zia, and post the summary in our Zoho Cliq sales channel.',
+        feature: 'Zia Text-to-Flow + Zia Summarize Text'
+      },
+      {
+        title: 'Prompt 2: Intelligent Support Ticket Triage',
+        prompt: 'Whenever a new ticket is created in Zoho Desk, analyze the conversation tone and summarize the issue in 3 bullet points using Zia, then use an agentic action to either escalate frustrated tickets in Zoho Cliq or send an email reply via Zoho Mail.',
+        feature: 'Zia Utilities + Run Agentic Action'
+      },
+      {
+        title: 'Prompt 3: Recruitment CV Screening Pipeline',
+        prompt: 'When a candidate submits an application in Zoho Forms, extract key skills and summarize their background with Zia, create a candidate record in Zoho Recruit, and run an agentic action to shortlist strong matches or flag for HR review.',
+        feature: 'Zia Extract Keywords + Agentic Routing'
+      },
+      {
+        title: 'Prompt 4: Content Repurposing Engine',
+        prompt: 'When a new article is published in WordPress, use Zia to generate a LinkedIn post, a newsletter summary, and three tweets in our brand tone, and save them to Zoho WorkDrive for review.',
+        feature: 'Zia Generate Customized Response, Essay & Tweet'
+      }
+    ];
+
+    const INTERVIEW_QA = [
+      {
+        q: '1. When should you use Zia Agentic Actions vs. traditional Decision blocks in Zoho Flow?',
+        a: 'Decision blocks follow deterministic, fixed rules (e.g., `amount > 10000`). Zia Agentic Actions complement Decision blocks when routing depends on unstructured context—such as reading a prospect’s note, assessing a candidate’s CV against a role, or evaluating customer frustration in a Zoho Desk ticket. You pre-configure the allowed pool of actions in Settings -> AI Setup -> Agentic actions, and the AI picks the safest match at runtime.'
+      },
+      {
+        q: '2. How do you combine multiple AI steps in a single Zoho Flow without losing reliability?',
+        a: 'Chain specialized Zia Utilities sequentially—for example, `Punctuate text` -> `Summarize text` -> `Extract keywords`—and use the "Test and Debug" panel before switching the flow on. When downstream apps require strict HTML or JSON schemas, place a Deluge Custom Function returning a `map` datatype right after the AI step to sanitize and validate keys.'
+      },
+      {
+        q: '3. How does Zoho Flow handle data privacy when using Zia vs. external LLM connectors like OpenAI or Claude?',
+        a: 'Native Zia Utilities and Zia Agentic Actions run entirely on Zoho’s own infrastructure (ISO 27001, SOC-2 Type II, GDPR compliant) and never use organizational data to train public models. When using third-party connectors (OpenAI, Anthropic Claude, DeepSeek), data traverses those external APIs via your configured API keys or OAuth connections.'
+      },
+      {
+        q: '4. What are the advanced capabilities of Zoho Flow’s Webhook Trigger?',
+        a: 'Zoho Flow’s Webhook Trigger supports JSON, Form Data, and Plain Text (used for XML payloads paired with Deluge). Under Advanced Settings, you can extract HTTP headers as variables, scope extraction to a specific nested JSON key (e.g., `contact.phones`), trigger separate flow runs for each array entry, and return custom Webhook Acknowledgement bodies/headers.'
+      }
+    ];
+
+    // --- STATE ---
+    let activeFlowId = FLOW_PROJECTS[0].id;
+    let activeNodeIndex = 0;
+    let activeCodeView = 'payload'; // 'payload' | 'deluge'
+    let activeFlowFilter = 'all';
+    let activeDelugeId = DELUGE_PATTERNS[0].id;
+    let simulationTimer = null;
+
+    // --- HELPERS ---
+    function showToast(message) {
+      const toast = document.getElementById('toastBanner');
+      toast.textContent = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2400);
+    }
+
+    function copyTextToClipboard(text, label) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast(label || 'Copied to clipboard!');
+          }).catch(() => fallbackCopy(text, label));
+        } else {
+          fallbackCopy(text, label);
+        }
+      } catch (e) {
+        fallbackCopy(text, label);
+      }
+    }
+
+    function fallbackCopy(text, label) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(label || 'Copied to clipboard!');
+      } catch (err) {
+        showToast('Copy ready');
+      }
+      document.body.removeChild(ta);
+    }
+
+    // --- RENDER TAB 1: WORKFLOWS ---
+    function renderFlowCards() {
+      const grid = document.getElementById('flowCardsGrid');
+      const filtered = activeFlowFilter === 'all'
+        ? FLOW_PROJECTS
+        : FLOW_PROJECTS.filter(f => f.category === activeFlowFilter);
+
+      grid.innerHTML = filtered.map(flow => {
+        const isSelected = flow.id === activeFlowId;
+        return `
+          <div data-flow-id="${flow.id}" class="flow-card cursor-pointer rounded-2xl p-4 transition-all border ${isSelected ? 'bg-sky-500/10 border-sky-500 shadow-lg shadow-sky-500/10' : 'glass-card border-slate-800 hover:border-slate-700'}">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${isSelected ? 'bg-sky-500 text-white' : 'bg-slate-800 text-sky-300'}">${flow.badge}</span>
+              <span class="text-xs text-slate-400 font-medium">${flow.category}</span>
+            </div>
+            <h3 class="text-sm font-bold text-white leading-snug mb-1.5">${flow.title}</h3>
+            <p class="text-xs text-slate-400 line-clamp-2 mb-3">${flow.subtitle}</p>
+            <div class="flex flex-wrap gap-1">
+              ${flow.appsUsed.map(app => `<span class="text-[11px] px-2 py-0.5 rounded bg-slate-900/90 text-slate-300 border border-slate-800">${app}</span>`).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.flow-card').forEach(card => {
+        card.addEventListener('click', () => {
+          activeFlowId = card.getAttribute('data-flow-id');
+          activeNodeIndex = 0;
+          renderFlowCards();
+          renderActiveFlowWorkbench();
+        });
+      });
+    }
+
+    function renderActiveFlowWorkbench() {
+      const flow = FLOW_PROJECTS.find(f => f.id === activeFlowId) || FLOW_PROJECTS[0];
+      document.getElementById('activeFlowBadge').textContent = flow.badge;
+      document.getElementById('activeFlowCategory').textContent = flow.category;
+      document.getElementById('activeFlowTitle').textContent = flow.title;
+      document.getElementById('activeFlowSubtitle').textContent = flow.subtitle;
+      document.getElementById('activeFlowHiringValue').textContent = flow.hiringValue;
+
+      const nodesContainer = document.getElementById('flowNodesContainer');
+      nodesContainer.innerHTML = flow.nodes.map((node, idx) => {
+        const isCurrent = idx === activeNodeIndex;
+        return `
+          <button type="button" data-node-idx="${idx}" class="node-step-btn text-left p-3.5 rounded-xl border transition-all flex flex-col justify-between ${isCurrent ? 'bg-sky-500/15 border-sky-400 node-pulse' : 'bg-slate-900/90 border-slate-800 hover:border-slate-700'}">
+            <div>
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[11px] font-mono-code uppercase px-1.5 py-0.5 rounded ${isCurrent ? 'bg-sky-500 text-white' : 'bg-slate-800 text-slate-400'}">${node.type}</span>
+                <span class="text-xs text-slate-400">Step ${idx + 1}</span>
+              </div>
+              <div class="text-xs sm:text-sm font-bold text-white mt-1">${node.name}</div>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-2 line-clamp-2">${node.desc}</div>
+          </button>
+        `;
+      }).join('');
+
+      nodesContainer.querySelectorAll('.node-step-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeNodeIndex = parseInt(btn.getAttribute('data-node-idx'), 10);
+          renderActiveFlowWorkbench();
+        });
+      });
+
+      const currentNode = flow.nodes[activeNodeIndex] || flow.nodes[0];
+      document.getElementById('inspectedNodeTitle').textContent = currentNode.name;
+      document.getElementById('inspectedNodeType').textContent = currentNode.type;
+      document.getElementById('inspectedNodeDesc').textContent = currentNode.desc;
+      document.getElementById('inspectedNodeConfig').textContent = currentNode.config;
+
+      updateCodePanel(flow);
+    }
+
+    function updateCodePanel(flow) {
+      const display = document.getElementById('activeCodeDisplay');
+      const payloadBtn = document.getElementById('showPayloadViewBtn');
+      const delugeBtn = document.getElementById('showDelugeViewBtn');
+
+      if (activeCodeView === 'payload') {
+        payloadBtn.className = 'px-2.5 py-1 rounded text-xs font-semibold bg-sky-500 text-white';
+        delugeBtn.className = 'px-2.5 py-1 rounded text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white';
+        display.textContent = flow.payloadTrace;
+      } else {
+        delugeBtn.className = 'px-2.5 py-1 rounded text-xs font-semibold bg-sky-500 text-white';
+        payloadBtn.className = 'px-2.5 py-1 rounded text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white';
+        display.textContent = flow.delugeCode;
+      }
+    }
+
+    function runFlowSimulation() {
+      if (simulationTimer) {
+        clearInterval(simulationTimer);
+        simulationTimer = null;
+      }
+      const flow = FLOW_PROJECTS.find(f => f.id === activeFlowId) || FLOW_PROJECTS[0];
+      const statusEl = document.getElementById('simulationStatusText');
+      activeNodeIndex = 0;
+      renderActiveFlowWorkbench();
+      statusEl.textContent = 'Simulating Step 1 of ' + flow.nodes.length + '...';
+
+      simulationTimer = setInterval(() => {
+        if (activeNodeIndex < flow.nodes.length - 1) {
+          activeNodeIndex += 1;
+          statusEl.textContent = 'Executing Step ' + (activeNodeIndex + 1) + ': ' + flow.nodes[activeNodeIndex].name + '...';
+          renderActiveFlowWorkbench();
+        } else {
+          clearInterval(simulationTimer);
+          simulationTimer = null;
+          statusEl.textContent = '✓ Flow Simulation Completed (All 5 Steps Verified)';
+          showToast('Simulation completed: ' + flow.title);
+        }
+      }, 650);
+    }
+
+    // --- RENDER TAB 2: CONNECTORS & ZIA TABLE ---
+    function renderConnectors() {
+      const searchVal = (document.getElementById('connectorSearchInput').value || '').toLowerCase().trim();
+      const catVal = document.getElementById('connectorCategorySelect').value;
+      const grid = document.getElementById('connectorsGrid');
+
+      const filtered = CONNECTORS_DATA.filter(item => {
+        const matchesCat = catVal === 'all' || item.category === catVal;
+        const matchesSearch = !searchVal ||
+          item.name.toLowerCase().includes(searchVal) ||
+          item.desc.toLowerCase().includes(searchVal) ||
+          item.triggers.toLowerCase().includes(searchVal) ||
+          item.actions.toLowerCase().includes(searchVal);
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full glass-card p-6 rounded-2xl text-center text-sm text-slate-400">No connectors matched your filter. Try clearing the search box.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(c => `
+        <div class="glass-card rounded-2xl p-4 border border-slate-800 flex flex-col justify-between space-y-3 hover:border-slate-700 transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/30">${c.badge}</span>
+              <span class="text-[11px] text-slate-400">${c.category}</span>
+            </div>
+            <h3 class="text-sm font-bold text-white">${c.name}</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">${c.desc}</p>
+          </div>
+          <div class="space-y-1.5 pt-2 border-t border-slate-800/80 text-[11px]">
+            <div><span class="text-slate-400 font-medium">Triggers:</span> <span class="text-slate-200">${c.triggers}</span></div>
+            <div><span class="text-slate-400 font-medium">Actions:</span> <span class="text-emerald-300">${c.actions}</span></div>
+            <div class="pt-1">
+              <a href="${c.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-sky-400 hover:text-sky-300 font-semibold underline">
+                <span>View Official Zoho Flow Docs</span>
+                <span>↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderZiaUtilitiesTable() {
+      const tbody = document.getElementById('ziaUtilitiesTableBody');
+      tbody.innerHTML = ZIA_UTILITIES_20.map(u => `
+        <tr class="hover:bg-slate-900/50">
+          <td class="py-2.5 px-3 font-mono-code font-semibold text-sky-300 whitespace-nowrap">${u.action}</td>
+          <td class="py-2.5 px-3 text-slate-300">${u.desc}</td>
+          <td class="py-2.5 px-3 text-slate-400">${u.useCase}</td>
+        </tr>
+      `).join('');
+    }
+
+    // --- RENDER TAB 3: DELUGE LAB ---
+    function renderDelugeLab() {
+      const listEl = document.getElementById('delugePatternList');
+      listEl.innerHTML = DELUGE_PATTERNS.map(p => {
+        const active = p.id === activeDelugeId;
+        return `
+          <button type="button" data-deluge-id="${p.id}" class="deluge-item-btn w-full text-left p-3.5 rounded-xl border transition ${active ? 'bg-sky-500/15 border-sky-500 text-white' : 'glass-card border-slate-800 text-slate-300 hover:border-slate-700'}">
+            <div class="text-xs font-bold">${p.title}</div>
+            <div class="text-[11px] text-slate-400 mt-1">${p.subtitle}</div>
+          </button>
+        `;
+      }).join('');
+
+      listEl.querySelectorAll('.deluge-item-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeDelugeId = btn.getAttribute('data-deluge-id');
+          renderDelugeLab();
+        });
+      });
+
+      const current = DELUGE_PATTERNS.find(p => p.id === activeDelugeId) || DELUGE_PATTERNS[0];
+      document.getElementById('delugeLabTitle').textContent = current.title;
+      document.getElementById('delugeLabSubtitle').textContent = current.subtitle;
+      document.getElementById('delugeLabCode').textContent = current.code;
+      document.getElementById('delugeLabNotes').textContent = current.notes;
+    }
+
+    // --- RENDER TAB 4: ZIA PROMPTS & INTERVIEW PREP ---
+    function renderInterviewTab() {
+      const promptGrid = document.getElementById('ziaPromptCardsContainer');
+      promptGrid.innerHTML = ZIA_PROMPTS.map((p, idx) => `
+        <div class="glass-card rounded-2xl p-4 border border-slate-800 flex flex-col justify-between space-y-3">
+          <div class="space-y-1.5">
+            <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">${p.feature}</span>
+            <h4 class="text-sm font-bold text-white">${p.title}</h4>
+            <p class="text-xs font-mono-code bg-slate-950 p-3 rounded-lg border border-slate-800 text-slate-200">"${p.prompt}"</p>
+          </div>
+          <div class="flex justify-end">
+            <button type="button" data-prompt-idx="${idx}" class="copy-zia-prompt-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 transition">
+              Copy Prompt for Zia Builder
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      promptGrid.querySelectorAll('.copy-zia-prompt-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.getAttribute('data-prompt-idx'), 10);
+          copyTextToClipboard(ZIA_PROMPTS[idx].prompt, 'Copied Zia Text-to-Flow prompt!');
+        });
+      });
+
+      const qaGrid = document.getElementById('interviewQaGrid');
+      qaGrid.innerHTML = INTERVIEW_QA.map(item => `
+        <div class="bg-slate-900/90 rounded-xl p-4 border border-slate-800 space-y-2">
+          <h4 class="text-xs sm:text-sm font-bold text-sky-300">${item.q}</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">${item.a}</p>
+        </div>
+      `).join('');
+    }
+
+    // --- NAVIGATION & CHART INIT ---
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.classList.add('bg-sky-500', 'text-white', 'shadow');
+          btn.classList.remove('text-slate-300');
+        } else {
+          btn.classList.remove('bg-sky-500', 'text-white', 'shadow');
+          btn.classList.add('text-slate-300');
+        }
+      });
+    }
+
+    function initChart() {
+      const ctx = document.getElementById('connectorStackChart');
+      if (!ctx || typeof Chart === 'undefined') return;
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Native Zia AI (20 Utilities + Agentic)', 'External LLMs & Vector DBs', 'Zoho Suite Apps', 'Core Logic, Webhooks & Deluge', '3rd-Party SaaS'],
+          datasets: [{
+            data: [23, 12, 18, 10, 15],
+            backgroundColor: ['#38bdf8', '#818cf8', '#34d399', '#f59e0b', '#f472b6'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: { color: '#cbd5e1', font: { size: 10 }, boxWidth: 10 }
+            }
+          }
+        }
+      });
+    }
+
+    // --- INIT EVENT LISTENERS ---
+    window.addEventListener('DOMContentLoaded', () => {
+      renderFlowCards();
+      renderActiveFlowWorkbench();
+      renderConnectors();
+      renderZiaUtilitiesTable();
+      renderDelugeLab();
+      renderInterviewTab();
+      initChart();
+
+      // Tab buttons
+      document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
+      });
+
+      // Hero quick actions
+      document.getElementById('heroExploreFlowsBtn').addEventListener('click', () => {
+        switchTab('workflows');
+        runFlowSimulation();
+      });
+      document.getElementById('heroExploreConnectorsBtn').addEventListener('click', () => {
+        switchTab('connectors');
+      });
+
+      // Flow filter buttons
+      document.querySelectorAll('.flow-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFlowFilter = btn.getAttribute('data-flow-filter');
+          document.querySelectorAll('.flow-filter-btn').forEach(b => {
+            b.className = 'flow-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white';
+          });
+          btn.className = 'flow-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500 text-white';
+          const matching = activeFlowFilter === 'all' ? FLOW_PROJECTS : FLOW_PROJECTS.filter(f => f.category === activeFlowFilter);
+          if (matching.length > 0 && !matching.some(f => f.id === activeFlowId)) {
+            activeFlowId = matching[0].id;
+            activeNodeIndex = 0;
+          }
+          renderFlowCards();
+          renderActiveFlowWorkbench();
+        });
+      });
+
+      // Workbench controls
+      document.getElementById('simulateFlowBtn').addEventListener('click', runFlowSimulation);
+      document.getElementById('showPayloadViewBtn').addEventListener('click', () => {
+        activeCodeView = 'payload';
+        const flow = FLOW_PROJECTS.find(f => f.id === activeFlowId) || FLOW_PROJECTS[0];
+        updateCodePanel(flow);
+      });
+      document.getElementById('showDelugeViewBtn').addEventListener('click', () => {
+        activeCodeView = 'deluge';
+        const flow = FLOW_PROJECTS.find(f => f.id === activeFlowId) || FLOW_PROJECTS[0];
+        updateCodePanel(flow);
+      });
+      document.getElementById('copyCodeSnippetBtn').addEventListener('click', () => {
+        const text = document.getElementById('activeCodeDisplay').textContent;
+        copyTextToClipboard(text, 'Copied code snippet!');
+      });
+      document.getElementById('copyFlowSummaryBtn').addEventListener('click', () => {
+        const flow = FLOW_PROJECTS.find(f => f.id === activeFlowId) || FLOW_PROJECTS[0];
+        const resumeBullet = `${flow.title}: ${flow.subtitle} Stack: ${flow.appsUsed.join(', ')}.`;
+        copyTextToClipboard(resumeBullet, 'Copied resume case-study bullet!');
+      });
+
+      // Connector search & filter
+      document.getElementById('connectorSearchInput').addEventListener('input', renderConnectors);
+      document.getElementById('connectorCategorySelect').addEventListener('change', renderConnectors);
+
+      // Deluge lab copy
+      document.getElementById('copyDelugeLabBtn').addEventListener('click', () => {
+        const code = document.getElementById('delugeLabCode').textContent;
+        copyTextToClipboard(code, 'Copied Deluge function!');
+      });
+
+      // Personalize Modal
+      const modal = document.getElementById('profileModal');
+      document.getElementById('openProfileModalBtn').addEventListener('click', () => modal.classList.remove('hidden'));
+      document.getElementById('closeProfileModalBtn').addEventListener('click', () => modal.classList.add('hidden'));
+      document.getElementById('cancelProfileBtn').addEventListener('click', () => modal.classList.add('hidden'));
+      document.getElementById('saveProfileBtn').addEventListener('click', () => {
+        const nameVal = document.getElementById('inputCandidateName').value.trim() || 'AI Automation & Zoho Flow';
+        const roleVal = document.getElementById('inputCandidateRole').value.trim() || 'Zoho Flow Architect';
+        const locVal = document.getElementById('inputCandidateLocation').value.trim() || 'Ahmedabad, India';
+
+        document.getElementById('navCandidateName').textContent = nameVal;
+        document.getElementById('heroCandidateName').textContent = nameVal;
+        document.getElementById('navCandidateRole').textContent = roleVal;
+        document.getElementById('heroLocationText').textContent = locVal;
+        modal.classList.add('hidden');
+        showToast('Portfolio header updated!');
+      });
+    });
+  </script>
+</body>
+</html>

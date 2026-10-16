@@ -1,0 +1,20 @@
+map calculate_invoice_aging(string dueDateStr, float amount)
+{
+    dueTime = dueDateStr.toTime("yyyy-MM-dd");
+    daysOverdue = dueTime.daysBetween(zoho.currentdate);
+    tone = "Polite and gentle reminder";
+    stage = "STAGE_1_SOFT";
+    if(daysOverdue >= 30)
+    {
+        tone = "Urgent executive escalation notice requiring immediate payment schedule";
+        stage = "STAGE_3_ESCALATE_FINANCE_MGR";
+    }
+    else if(daysOverdue >= 14)
+    {
+        tone = "Firm, professional two-week overdue follow-up";
+        stage = "STAGE_2_FIRM";
+    }
+    res = Collection();
+    res.insert("days_overdue": daysOverdue, "tone_directive": tone, "collection_stage": stage);
+    return res;
+}

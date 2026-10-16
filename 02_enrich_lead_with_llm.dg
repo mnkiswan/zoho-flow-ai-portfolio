@@ -1,0 +1,22 @@
+map enrich_lead_with_llm(string leadCompany, string leadMessage)
+{
+    headersMap = Collection("Content-Type": "application/json");
+    promptBody = Collection();
+    promptBody.insert("model": "gpt-4o-mini");
+    promptBody.insert("input": "Extract company size, urgency (High/Med/Low), and primary product from: " + leadCompany + " - " + leadMessage);
+    
+    response = invokeurl
+    [
+        url :"https://api.openai.com/v1/responses"
+        type :POST
+        parameters: promptBody.toString()
+        headers: headersMap
+        connection:"openai_production_oauth"
+    ];
+    
+    result = Collection();
+    result.insert("raw_ai_output": response.get("output_text"));
+    result.insert("processed_at": zoho.currenttime.toString("yyyy-MM-dd HH:mm:ss"));
+    info result;
+    return result;
+}
